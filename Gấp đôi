@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+ 
+using namespace std;
+ 
+#define faster() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define ll long long
+#define endl '\n'
+ 
+ll v[95] = {};
+ll n, k;
+ 
+void sieve(){
+	v[0] = 0;
+	v[1] = 1;
+	for(int i = 2; i <= 50; i++){
+		v[i] = v[i - 1] * 2 + 1;
+	}
+}
+int Found(ll n, ll k){
+    //cout << n << " " << k << " " << v[n] << endl;
+	if(k == ((v[n] + 1) / 2)) return n;
+	if(k > ((v[n] + 1) / 2)) return Found(n - 1, k - (v[n] + 1) / 2);
+	else return Found(n - 1, k);
+}
+ 
+int main (){
+    faster();
+	sieve();
+	int t; cin >> t; while(t--){
+		cin >> n >> k;
+		cout << Found(n, k) << endl;
+	}
+}
